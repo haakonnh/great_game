@@ -18,11 +18,11 @@ def start_pygame():
     colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
     color_index = 0
     running = True
+    
     while running:
         screen.fill((30, 30, 30))
         agents = objects_data.get("agents", {})
         for obj_id, obj in agents.items():
-
             x, y = obj.get("position", [0, 0])
             pygame.draw.circle(screen, colors[color_index], (int(x), int(y)), 10)
             color_index = (color_index + 1) % len(colors)

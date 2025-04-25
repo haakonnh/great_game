@@ -1,4 +1,5 @@
 agent_state = {
+    "agent1": {"position": [100, 100], "angle": 0, "body": None},
 }
 
 # Add this
