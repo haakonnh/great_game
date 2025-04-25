@@ -1,7 +1,7 @@
 # run_demo.py
-from game_state import GameState
-from game import run_game_loop
-from api import create_api
+from engine.game_state import GameState
+from game.game import run_game_loop
+from api.api import create_api
 import threading
 import uvicorn
 

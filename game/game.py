@@ -1,5 +1,6 @@
 # game.py
 import pygame
+import pymunk
 
 def run_game_loop(game_state):
     pygame.init()
@@ -21,7 +22,16 @@ def run_game_loop(game_state):
         screen.fill((30, 30, 30))
         x, y = int(game_state.ball_body.position.x), int(game_state.ball_body.position.y)
         pygame.draw.circle(screen, (0, 255, 0), (x, y), 25)
-        pygame.display.flip()
+        
+        # Draw all static shapes
+        for shape in game_state.space.shapes:
+            if isinstance(shape, pymunk.Segment):
+                pygame.draw.line(screen, (200, 200, 200),
+                                shape.a, shape.b, int(shape.radius))
+            elif isinstance(shape, pymunk.Poly):
+                points = [(int(p.x), int(p.y)) for p in shape.get_vertices()]
+                pygame.draw.polygon(screen, (200, 200, 200), points)
+                pygame.display.flip()
 
     pygame.quit()
 
