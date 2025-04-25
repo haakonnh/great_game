@@ -29,9 +29,9 @@ def run_game_loop(game_state):
                 pygame.draw.line(screen, (200, 200, 200),
                                 shape.a, shape.b, int(shape.radius))
             elif isinstance(shape, pymunk.Poly):
-                points = [(int(p.x), int(p.y)) for p in shape.get_vertices()]
-                pygame.draw.polygon(screen, (200, 200, 200), points)
-                pygame.display.flip()
+                points = [shape.body.local_to_world(v) for v in shape.get_vertices()]
+                pygame.draw.polygon(screen, (200, 200, 200), [(int(p.x), int(p.y)) for p in points])
+        pygame.display.flip()
 
     pygame.quit()
 

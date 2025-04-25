@@ -10,7 +10,7 @@ class GameState:
 
         # Add a ball
         self.ball_body = pymunk.Body(1, 100)
-        self.ball_body.position = (100, 100)
+        self.ball_body.position = (300, 300)
         self.ball_shape = pymunk.Circle(self.ball_body, 25)
         self.ball_shape.elasticity = 0.8
         self.space.add(self.ball_body, self.ball_shape)
@@ -21,6 +21,11 @@ class GameState:
         floor_shape.friction = 1.0
         floor_shape.elasticity = 0.9
         self.space.add(floor_body, floor_shape)
+        
+        # Top Wall
+        wall_t = pymunk.Segment(floor_body, (0, 0), (800, 0), 5)
+        wall_t.elasticity = 0.9
+        self.space.add(wall_t)
         
         # --- Left wall ---
         wall_l = pymunk.Segment(floor_body, (0, 0), (0, 600), 5)
@@ -34,8 +39,9 @@ class GameState:
 
         # --- Platform ---
         platform_body = pymunk.Body(body_type=pymunk.Body.STATIC)
-        platform = pymunk.Poly.create_box(platform_body, (200, 20))
         platform_body.position = (400, 400)
+        platform = pymunk.Poly.create_box(platform_body, (300, 20))
+
         platform.elasticity = 0.8
         self.space.add(platform_body, platform)
 

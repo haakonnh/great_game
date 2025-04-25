@@ -6,8 +6,8 @@ async def run_interactor():
     async with httpx.AsyncClient() as client:
         while True:
             # call get /act
-            fx = random.randint(-5000, 5000)
-            fy = random.randint(-5000, 5000)
+            fx = random.randint(-25000, 25000)
+            fy = random.randint(-25000, 25000)
             try:
                 resp = await client.post("http://localhost:8000/act", json={
                     "action": {
@@ -19,7 +19,7 @@ async def run_interactor():
                     print("[Interactor] Response:", resp.json())
             except Exception as e:
                 print("[Interactor] Error:", e)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.5)
 
 if __name__ == "__main__":
     asyncio.run(run_interactor())
