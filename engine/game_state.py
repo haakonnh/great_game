@@ -4,7 +4,7 @@ import pymunk
 class GameState:
     def __init__(self):
         self.space = pymunk.Space()
-        self.space.gravity = (0, 0)
+        self.space.gravity = (0, 600)
         self.time = 0
         self.is_running = True
 
