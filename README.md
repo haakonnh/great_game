@@ -15,3 +15,7 @@ Runs a loop in 60 frames per second, visualizing the current state of the game.
 
 ### Engine
 Implements physics and keeps track of state in the GameWorld object, exposed on the API.
+
+
+# RUN
+python run_demo.py
