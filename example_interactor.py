@@ -8,6 +8,7 @@ async def run_interactor():
             # call get /act
             fx = random.randint(-25000, 25000)
             fy = random.randint(-50000, -10000)
+            
             try:
                 resp = await client.post("http://localhost:8000/act", json={
                     "action": {

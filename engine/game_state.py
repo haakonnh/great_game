@@ -1,6 +1,8 @@
 # gamestate.py
 import pymunk
 import random 
+
+
 class GameState:
     def __init__(self):
         self.space = pymunk.Space()
@@ -16,6 +18,8 @@ class GameState:
         self.ball_shape = pymunk.Circle(self.ball_body, 25)
         self.ball_shape.elasticity = 0.8
         self.space.add(self.ball_body, self.ball_shape)
+        
+        pymunk.im
         
         
         """ # Ground obstacle
@@ -63,6 +67,7 @@ class GameState:
         self.ball_body.apply_force_at_local_point((fx, fy))
 
 
+# Function to generate randomly placed and sized obstacles
 def generate_random_obstacles(space, count=10, map_bounds=(1200, 800), size_range=(50, 500)):
     obstacles = []
 
