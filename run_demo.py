@@ -30,8 +30,6 @@ async def main():
     # Start game loop in main thread
     run_game_loop(game_state)
     
-    
-    
     dummy_proc.terminate()
 
 # Asyncio is used to run asynchronous functions in main

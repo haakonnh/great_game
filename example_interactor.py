@@ -6,9 +6,8 @@ async def run_interactor():
     async with httpx.AsyncClient() as client:
         while True:
             # call get /act
-            fx = random.randint(-25000, 25000)
+            fx = random.randint(-12500, 12500)
             fy = random.randint(-50000, -10000)
-            
             try:
                 resp = await client.post("http://localhost:8000/act", json={
                     "action": {

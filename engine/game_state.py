@@ -10,16 +10,22 @@ class GameState:
         self.time = 0
         self.is_running = True
         
-        self.obstacles = generate_random_obstacles(self.space, count=750, size_range=(40, 300), map_bounds=(5000, 5000))
+        self.obstacles = generate_random_obstacles(self.space, count=2000, size_range=(40, 300), map_bounds=(10000, 10000))
 
         # Add a ball
         self.ball_body = pymunk.Body(1, 100)
-        self.ball_body.position = (300, 300)
+        self.ball_body.position = (-9000, -9000)
         self.ball_shape = pymunk.Circle(self.ball_body, 25)
         self.ball_shape.elasticity = 0.8
         self.space.add(self.ball_body, self.ball_shape)
         
-        pymunk.im
+        # Add more balls
+        for _ in range(50):
+            enemy_body = pymunk.Body(1, 100)
+            enemy_body.position = (random.randint(-10000, 10000), random.randint(-10000, 10000))
+            enemy_shape = pymunk.Circle(enemy_body, 100)
+            enemy_shape.elasticity = 0.8
+            self.space.add(enemy_body, enemy_shape)
         
         
         """ # Ground obstacle
@@ -40,14 +46,46 @@ class GameState:
         wall_r = pymunk.Segment(floor_body, (800, 0), (800, 600), 5)
         wall_r.elasticity = 0.9
         self.space.add(wall_r) """
+        
+        
 
         # --- Platform ---
         platform_body = pymunk.Body(body_type=pymunk.Body.STATIC)
         platform_body.position = (400, 400)
         platform = pymunk.Poly.create_box(platform_body, (300, 20))
+        
+        # Bottom boundary
+        bottom_boundary_body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        bottom_boundary_body.position = (0, 10000)
+        bottom_boundary = pymunk.Poly.create_box(bottom_boundary_body, (20000, 50))
+        bottom_boundary.elasticity = 0.8
 
-        platform.elasticity = 0.8
+        self.space.add(bottom_boundary_body, bottom_boundary)
+
+        # Left boundary
+        left_boundary_body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        left_boundary_body.position = (-10000, 0)
+        left_boundary = pymunk.Poly.create_box(left_boundary_body, (50, 20000))
+        left_boundary.elasticity = 0.8
+        self.space.add(left_boundary_body, left_boundary)
+        
+        # Right boundary
+        right_boundary_body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        right_boundary_body.position = (10000, 0)
+        right_boundary = pymunk.Poly.create_box(right_boundary_body, (50, 20000))
+        right_boundary.elasticity = 0.8
+        self.space.add(right_boundary_body, right_boundary)
+        
+        # Top boundary
+        top_boundary_body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        top_boundary_body.position = (0, -10000)
+        top_boundary = pymunk.Poly.create_box(top_boundary_body, (20000, 50))
+        top_boundary.elasticity = 0.8
+        self.space.add(top_boundary_body, top_boundary)
         self.space.add(platform_body, platform)
+
+        """ platform.elasticity = 0.8
+        self.space.add(platform_body, platform) """
 
     def step(self, dt):
         self.space.step(dt)
