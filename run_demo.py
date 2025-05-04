@@ -12,7 +12,7 @@ def start_api(app):
 # This function runs the dummy interactor in a separate process
 async def run_dummy():
     proc = await asyncio.create_subprocess_exec(
-        "python", "example_interactor.py"
+        "python", "agents/example_interactor.py"
     )
     return proc
 

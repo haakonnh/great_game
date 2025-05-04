@@ -68,7 +68,6 @@ def run_game_loop(game_state):
     scale_y = SCREEN_HEIGHT / MINIMAP_HEIGHT
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    minimap = pygame.Surface((MINIMAP_WIDTH, MINIMAP_HEIGHT))
     clock = pygame.time.Clock()
 
     running = True
@@ -128,8 +127,7 @@ def run_game_loop(game_state):
         # Draw all static shapes
         for shape in game_state.space.shapes:
             if isinstance(shape, pymunk.Segment):
-                pygame.draw.line(screen, (200, 200, 200),
-                                to_screen(shape.a), to_screen(shape.b), int(shape.radius))
+                pygame.draw.line(screen, (200, 200, 200), to_screen(shape.a), to_screen(shape.b), int(shape.radius))
             # If its poly but not the ship
             elif isinstance(shape, pymunk.Poly) and shape.body != game_state.ship_body:
                 points = [shape.body.local_to_world(v) for v in shape.get_vertices()]
@@ -151,9 +149,6 @@ def run_game_loop(game_state):
         lives_text = font.render(f"Lives: {game_state.lives}", True, (255, 255, 255))
         screen.blit(lives_text, (screen.get_width() - lives_text.get_width() - 20, 100))
 
-        # Draw a red circle of radius 1000 around the ship
-        pygame.draw.circle(screen, (255, 0, 0), (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), game_state.radar_radius, 1)
-        
             
         pygame.display.flip()
 

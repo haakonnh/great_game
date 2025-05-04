@@ -112,16 +112,16 @@ class GameState:
         act = action.get('action')
         fy = act.get('fy', 0)
         shoot = act.get('shoot', False)
-        clockwise_rotate = act.get('clockwise_rotate', False)
-        counter_clockwise_rotate = act.get('counter_clockwise_rotate', False)
+        clockwise_rotate_boolean, clockwise_force = act.get('clockwise_rotate', (False, 0))
+        counter_clockwise_rotate_boolean, counter_clockwise_force = act.get('counter_clockwise_rotate', (False, 0))
         if shoot:
             self.fire_bullet()
         
-        if clockwise_rotate:
-            self.ship_body.apply_force_at_local_point((0, -100), (-12, -8))
+        if clockwise_rotate_boolean:
+            self.ship_body.apply_force_at_local_point((0, -clockwise_force), (-12, -8))
         
-        if counter_clockwise_rotate:
-            self.ship_body.apply_force_at_local_point((0, -100), (12, -8))
+        if counter_clockwise_rotate_boolean:
+            self.ship_body.apply_force_at_local_point((0, -counter_clockwise_force), (12, -8))
         
         self.ship_body.apply_force_at_local_point((0, fy))
             
