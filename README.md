@@ -43,6 +43,9 @@ Runs a loop in 60 frames per second, visualizing the current state of the game.
 ### Engine
 Implements physics and keeps track of state in the GameWorld object, exposed on the API.
 
+
 # RUN
 Install requirements.
 python run_demo.py
+
+Parameters like game_state.ball_speed can be changed to change how fast balls are.
