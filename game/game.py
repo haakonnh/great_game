@@ -112,8 +112,8 @@ def run_game_loop(game_state):
         # Apply random forces to the balls
         for shape in game_state.space.shapes:
             if isinstance(shape, pymunk.Circle) and (shape.body, shape) not in game_state.bullets:
-                fx = random.randint(-1750, 1750)
-                fy = random.randint(-1750, 1750)
+                fx = random.randint(-game_state.ball_speed, game_state.ball_speed)
+                fy = random.randint(-game_state.ball_speed, game_state.ball_speed)
                 shape.body.apply_force_at_local_point((fx, fy), (0, 0))
 
         game_state.step(dt)

@@ -15,6 +15,8 @@ class GameState:
         self.lives = 5
         self.last_time_hit = -999
         self.radar_radius = 500
+        self.ball_amount = 150
+        self.ball_speed = 2000
         
         self.bullets = []
         self.enemies = []
@@ -36,7 +38,7 @@ class GameState:
         self.space.add(self.ship_body, self.ship_shape)
         
         # Add more balls
-        for _ in range(125):
+        for _ in range(self.ball_amount):
             enemy_body = pymunk.Body(1, 100)
             enemy_body.position = (random.randint(-10000, 10000), random.randint(-10000, 10000))
             enemy_shape = pymunk.Circle(enemy_body, 50)
