@@ -12,8 +12,9 @@ class GameState:
         self.is_running = True
         self.score = 0
         self.ammo = 50
-        self.lives = 3
+        self.lives = 5
         self.last_time_hit = -999
+        self.radar_radius = 500
         
         self.bullets = []
         self.enemies = []
@@ -113,19 +114,14 @@ class GameState:
         shoot = act.get('shoot', False)
         clockwise_rotate = act.get('clockwise_rotate', False)
         counter_clockwise_rotate = act.get('counter_clockwise_rotate', False)
-        print(f"Applying force: {fy}")
         if shoot:
             self.fire_bullet()
-            print("Firing bullet!")
         
         if clockwise_rotate:
             self.ship_body.apply_force_at_local_point((0, -100), (-12, -8))
         
         if counter_clockwise_rotate:
             self.ship_body.apply_force_at_local_point((0, -100), (12, -8))
-            
-        
-        
         
         self.ship_body.apply_force_at_local_point((0, fy))
             
@@ -185,7 +181,7 @@ class GameState:
     
             
     def _handle_ship_object(self, arbiter, space, data):
-        cooldown = 1.0  # 1 second cooldown
+        cooldown = 0.5  # 1 second cooldown
         if self.time - self.last_time_hit >= cooldown:
             self.lives -= 1
             self.last_time_hit = self.time

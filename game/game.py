@@ -88,15 +88,25 @@ def run_game_loop(game_state):
                 game_state.is_running = False
                 
         if game_state.ammo <= 0 or game_state.lives <= 0:
-            running = False
             game_state.is_running = False
-            
-            # Display game over message
+
+            # Fill screen and draw game over screen
+            screen.fill((0, 0, 0))
             font = pygame.font.SysFont("Arial", 50)
             game_over_text = font.render("Game Over", True, (255, 0, 0))
-            # Show score
             score_text = font.render(f"Score: {game_state.score}", True, (255, 255, 255))
-            screen.blit(game_over_text, (SCREEN_WIDTH // 2 - game_over_text.get_width() // 2, SCREEN_HEIGHT // 2 - game_over_text.get_height() // 2))
+
+            screen.blit(game_over_text, (SCREEN_WIDTH // 2 - game_over_text.get_width() // 2,
+                                        SCREEN_HEIGHT // 2 - game_over_text.get_height() // 2))
+            screen.blit(score_text, (SCREEN_WIDTH // 2 - score_text.get_width() // 2,
+                                    SCREEN_HEIGHT // 2 + 60))
+
+            pygame.display.flip()  # Show the frame
+
+            # Pause before exiting
+            pygame.time.wait(3000)
+            running = False
+
 
         
                 
@@ -141,6 +151,9 @@ def run_game_loop(game_state):
         lives_text = font.render(f"Lives: {game_state.lives}", True, (255, 255, 255))
         screen.blit(lives_text, (screen.get_width() - lives_text.get_width() - 20, 100))
 
+        # Draw a red circle of radius 1000 around the ship
+        pygame.draw.circle(screen, (255, 0, 0), (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), game_state.radar_radius, 1)
+        
             
         pygame.display.flip()
 
