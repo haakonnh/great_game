@@ -19,6 +19,6 @@ def create_api(game_state):
     @app.post("/act")
     def act(action: dict):
         game_state.apply_action(action)
-        return {"status": "force applied"}
+        return {"status": "action taken"}
 
     return app
