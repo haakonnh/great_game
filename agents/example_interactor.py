@@ -17,9 +17,12 @@ async def run_interactor():
             except Exception as e:
                 print("[Interactor] Error:", e)
             # call get /act
-            fy = random.randint(-3000, 0)
+            
+            # thrust force
+            fy = random.randint(-5000, 0)
+            
             # rotational force
-            frot = random.randint(0, 200)
+            frot = random.randint(0, 300)
             try:
                 resp = await client.post("http://localhost:8000/act", json={
                     "action": {

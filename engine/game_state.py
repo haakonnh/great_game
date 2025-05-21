@@ -15,8 +15,8 @@ class GameState:
         self.lives = 5
         self.last_time_hit = -999
         self.radar_radius = 500
-        self.ball_amount = 150
-        self.ball_speed = 2000
+        self.ball_amount = 200
+        self.ball_speed = 1250
         
         self.bullets = []
         self.enemies = []

@@ -27,7 +27,7 @@ Additionally, the agent will get radar information including:
 
 #### POST
 The game is currently single-player so it will be run locally, where an agent can connect to the localhost and POST to the API with the following parameters:
-* fy (force in y direction = thrust)
+* fy (negative force in y direction = thrust) 
 * clockwise rotation force 
 * counter clockwiser rotation force
 * shoot (true or false)
@@ -43,9 +43,8 @@ Runs a loop in 60 frames per second, visualizing the current state of the game.
 ### Engine
 Implements physics and keeps track of state in the GameWorld object, exposed on the API.
 
-
 # RUN
 Install requirements.
 python run_demo.py
 
-Parameters like game_state.ball_speed can be changed to change how fast balls are.
+Parameters like game_state.ball_speed and game_state.ball_amount can be changed to change how fast balls are and how many there are.
